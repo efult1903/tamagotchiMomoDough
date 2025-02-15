@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Virtual Pet</title>
+    <script>
+        async function fetchPet() {
+            let response = await fetch("/pet");
+            let data = await response.json();
+            document.getElementById("hunger").innerText = "Hunger: " + data.hunger;
+            document.getElementById("happiness").innerText = "Happiness: " + data.happiness;
+        }
+
+        async function feedPet() {
+            let response = await fetch("/feed", { method: "POST" });
+            let data = await response.json();
+            document.getElementById("hunger").innerText = "Hunger: " + data.hunger;
+        }
+
+        async function playWithPet() {
+            let response = await fetch("/play", { method: "POST" });
+            let data = await response.json();
+            document.getElementById("happiness").innerText = "Happiness: " + data.happiness;
+        }
+    </script>
+</head>
+<body onload="fetchPet()">
+    <h1>Virtual Pet</h1>
+    <p id="hunger">Hunger: Loading...</p>
+    <p id="happiness">Happiness: Loading...</p>
+    <button onclick="feedPet()">Feed</button>
+    <button onclick="playWithPet()">Play</button>
+</body>
+</html>
