@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 import firebase_admin
 from firebase_admin import credentials, firestore
 from flask import send_file
+import os
 
 
 # Initialize Firebase
@@ -43,7 +44,7 @@ def play_with_pet():
 
 @tamagotchi.route("/")
 def home():
-    return send_file("index.html")
+    return send_file(os.path.join(os.path.dirname(__file__), "index.html"))
 
 # Run the Flask app
 if __name__ == "__main__":
