@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Virtual Pet</title>
+    <title>Kitty</title>
     <script>
-        const API_URL = "https://tamagotchiMomoDough.onrender.com";
+        const API_URL = "https://my-tamagotchi.onrender.com";  // Change to your actual Render URL
 
         async function fetchPet() {
             let response = await fetch(API_URL + "/pet");
             let data = await response.json();
-            document.getElementById("hunger").innerText = "Hunger: " + data.hunger;
-            document.getElementById("happiness").innerText = "Happiness: " + data.happiness;
+            document.getElementById("hunger").innerText = "Hunger: " + data.hunger + "%";
+            document.getElementById("happiness").innerText = "Happiness: " + data.happiness + "%";
         }
 
         async function feedPet() {
             let response = await fetch(API_URL + "/feed", { method: "POST" });
             let data = await response.json();
-            document.getElementById("hunger").innerText = "Hunger: " + data.hunger;
+            document.getElementById("hunger").innerText = "Hunger: " + data.hunger + "%";
         }
 
         async function playWithPet() {
             let response = await fetch(API_URL + "/play", { method: "POST" });
             let data = await response.json();
-            document.getElementById("happiness").innerText = "Happiness: " + data.happiness;
+            document.getElementById("happiness").innerText = "Happiness: " + data.happiness + "%";
         }
+
+        // Fetch pet data every 5 seconds to keep UI updated
+        setInterval(fetchPet, 5000);
+
     </script>
 </head>
 <body onload="fetchPet()">
-    <h1>Virtual Pet</h1>
+    <h1>Kitty</h1>
     <p id="hunger">Hunger: Loading...</p>
     <p id="happiness">Happiness: Loading...</p>
     <button onclick="feedPet()">Feed</button>
